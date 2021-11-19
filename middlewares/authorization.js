@@ -11,7 +11,7 @@ export default function authorization(req, res) {
 
       if (authType !== "Bearer") return res.status(401).end();
 
-      const verify = jwt.verify(authToken, "ibukuCantik");
+      const verify = jwt.verify(authToken, process.env.JWT_SECRET);
 
       resolve(verify);
     } catch (error) {

@@ -17,14 +17,14 @@ export default async function handler(req, res) {
 
   const checkPassword = await bcrypt.compare(password, checkUser.password);
 
-  if (!checkPassword) return res.status(402).end();
+  if (!checkPassword) return res.status(401).end();
 
   const token = jwt.sign(
     {
       id: checkUser.id,
       email: checkUser.email,
     },
-    "ibukuCantik",
+    process.env.JWT_SECRET,
     {
       expiresIn: "1d",
     }
